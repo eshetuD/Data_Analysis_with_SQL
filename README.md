@@ -47,6 +47,7 @@ order by
 </code>
 
 ## 2. Show Each product sale by age group
+Objective: Understanding how products perform across different age groups is essential for targeted product development and marketing efforts. This analysis breaks down product sales by customer age groups, offering valuable information to optimize inventory, marketing, and product placement strategies.
 
 <code>
 with cte_age as (
@@ -104,6 +105,8 @@ order by
 
 ## 3. Show Monthly Sales for Australia and USA Compoared for the Year 2012
 
+Objective: By comparing the monthly sales figures between Australia and the USA for the year 2012, this analysis aims to identify trends, seasonality, and potential opportunities or challenges in each market. This insight is crucial for strategic planning and resource allocation. 
+
 <code>
 select 
 	SUBSTRING(cast(OrderDateKey as char), 1,6) as MonthKey,
@@ -123,3 +126,50 @@ AND
 ;
 </code>
 
+## 4. Displaying First Re-Order Date for Each Product
+
+Objective: Utilizing the DimInternetSales and Product tables, this analysis provides information on the first re-order date for each product. Knowing when a product is typically re-ordered is vital for managing inventory efficiently, ensuring products are restocked at the right time.
+<code>
+with cte_first as (
+select
+	EnglishProductName,
+	OrderDateKey,
+	SafetyStockLevel,
+	ReorderPoint,
+	SUM(OrderQuantity) as Sales
+from 
+	AdventureWorksDW2019.dbo.FactInternetSales fis
+JOIN 
+	AdventureWorksDW2019.dbo.DimProduct pr
+ON
+	fis.ProductKey = pr.ProductKey
+group by 
+	EnglishProductName,
+	OrderDateKey,
+	SafetyStockLevel,
+	ReorderPoint
+),
+final as (
+	select 
+		*, 
+		CASE WHEN (SafetyStockLevel - Running_Total_Sales) <= ReorderPoint THEN 1 ELSE 0 end as Reorder_Flag
+	from
+		(
+			select 
+				*, 
+				SUM(Sales) over (partition by EnglishProductName order by OrderDateKey) as Running_Total_Sales 
+			from cte_first
+		) as Main_SQ
+)
+
+select 
+	EnglishProductName, 
+	MIN(OrderDateKey) as first_reorder_date 
+from 
+	final
+where 
+	Reorder_Flag = 1
+group by 
+	EnglishProductName
+;
+</code>
