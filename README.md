@@ -21,3 +21,13 @@ Objective: Utilizing the DimInternetSales and Product tables, this analysis prov
 
 Objective: This analysis calculates the days between the first order and the first re-order for products in Q4. By identifying products that take over a year to re-order, businesses can assess stock levels, potential overstock situations, and adjust their supply chain strategies accordingly.
 ![Alt](./Screenshot/Q5.png)
+
+## 6. Sales on Promotion and Impact of 25% Discount
+
+Objective: Examining sales on promotion and simulating the impact of a 25% discount allows businesses to evaluate the effectiveness of promotions on sales revenue. This insight aids in designing promotional campaigns that maximize customer engagement and revenue growth.
+![Alt](./Screenshot/Q6.png)
+
+## 7. Customer Sales History: First and Last Sales, and the Difference
+Objective: This analysis focuses on providing a comprehensive view of customer sales history, showcasing the value of their initial and most recent purchases. Additionally, it calculates the difference between these two values, offering insights into customer loyalty, retention, and changes in purchasing behavior over time.
+
+![Alt](./Screenshot/Q7.png)
