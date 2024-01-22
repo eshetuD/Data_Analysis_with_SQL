@@ -1,3 +1,4 @@
+-- 4. Using DimInternetSales and Product Table, Display each product first re-Order date
 with cte_first as (
 select
 	EnglishProductName,
