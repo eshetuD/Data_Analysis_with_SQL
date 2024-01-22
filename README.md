@@ -1,6 +1,7 @@
 # Data_Analysis_with_SQL
 1. Sales Distribution by Customer Age Group across Countries
 Objective: This analysis aims to provide insights into the distribution of sales across different customer age groups within each country. By categorizing customers into age groups, we can identify patterns and preferences in purchasing behaviour, allowing businesses to tailor marketing strategies accordingly.
+<code>
 with cte_age as (
 	select 
 		EnglishCountryRegionName,
@@ -43,3 +44,4 @@ group by
 order by 
 	EnglishCountryRegionName, Age_group
 ;
+</code>
