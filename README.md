@@ -170,10 +170,8 @@ from
 where 
 	Reorder_Flag = 1
 group by 
-	EnglishProductName
-;
+	EnglishProductName;
 </code>
-
 ## 5. Days Between First Order and First Re-Order for Q4 Products
 
 Objective: This analysis calculates the days between the first order and the first re-order for products in Q4. By identifying products that take over a year to re-order, businesses can assess stock levels, potential overstock situations, and adjust their supply chain strategies accordingly.
